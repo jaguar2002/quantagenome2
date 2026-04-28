@@ -23,7 +23,7 @@ class ChunkFeaturePayload:
             chunk_id = str(data["chunk_id"]), #converting to string
             chromosome = str(data["chromosome"]),
             start = data["start"],#make sure it's an integer.
-            end = int(data["end"]), #
+            end = int(data["end"]),
             mutation_density = float(data["mutation_density"]),
             ssr_density = float(data["repeat_density"]),
             gc_ratio = float(data["gc_ratio"]),
@@ -33,7 +33,7 @@ class ChunkFeaturePayload:
         )
 
     def feature_vector(self) -> list[float]:
-        return[
+        return[ #making a list of a chunk's features
             self.mutation_density,
             self.ssr_density,
             self.gc_ratio,
@@ -41,14 +41,16 @@ class ChunkFeaturePayload:
             self.sensitive_span_ratio,
             self.uniqueness_score
         ]
+
+#this class is used to hold the final result after the AI analyzes,
 @dataclass
 class TriageResult:
 
-    chunk_id : str
-    sensitive : bool
-    confidence : float
-    explanation : str
-    model_version : str
+    chunk_id : str #which chunk id is being used.
+    sensitive : bool # true meaning privacy risk is high false means privacy risk is low
+    confidence : float #final confidence rating of the model (0.0 to 1.0)
+    explanation : str #human-readable reason why it is flagged
+    model_version : str #identifying the model version that made this prediction.
 
     def to_dict(self) -> dict[str,Any]:
 
@@ -58,5 +60,5 @@ class TriageResult:
             "confidence" : round(self.confidence,4),
             "explanation" : self.explanation,
             "model_version" : self.model_version
-        }
+        } #final triage result
 
