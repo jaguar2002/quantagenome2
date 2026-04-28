@@ -71,8 +71,10 @@ public class MotifScanner { // declares the class responsible for scanning one c
     } // ends the scan method
 
     public record MotifScanResult( // declares a compact result object for one chunk's motif scan
+
                                    List<String> matchedMotifs, // stores the unique motif types that were found
                                    int occurrenceCount, // stores the total number of motif occurrences found
                                    int sensitiveBasesCovered // stores the number of chunk bases covered by matched motifs
-    ) {} // ends the MotifScanResult record
+
+    ) {}  // ends the MotifScanResult record
 } // ends the MotifScanner class  ke

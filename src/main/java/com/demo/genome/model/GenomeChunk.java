@@ -8,4 +8,12 @@ public class GenomeChunk {
     public int start() {
         return 0;
     }
+
+    public String chunkId() {
+        return null;
+    }
+
+    public Object chromosome() {
+        return null;
+    }
 }
