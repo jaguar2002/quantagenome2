@@ -1,6 +1,9 @@
 package com.demo.genome.model;
 
 public class GenomeChunk {
+    public GenomeChunk(String chunkId, String chromosome, int oneBasedStart, int oneBaseEnd, String chunkSequence) {
+    }
+
     public String sequence() {
         return null;
     }
