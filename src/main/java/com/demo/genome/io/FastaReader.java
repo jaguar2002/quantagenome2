@@ -39,10 +39,25 @@ public class FastaReader { //FASTA file format file reader
                 }
                 else{
                     sequenceBuilder.append(line);//else it appends the line to te sequence builder.
-                }
+                }//ends the check of the line type
 
             }
         }
+        catch (IOException e) { // catches low-level file I/O problems
+            throw new RuntimeException("Failed to read FASTA file: " + fastaPath, e); // wraps and rethrows the file read error
+        } // ends the catch block
+
+        if(header == null){ // if no header found
+            throw new IllegalArgumentException("No FASTA header found in file: " + fastaPath); // throws an error if the file is not a valid FASTA
+        }
+
+        String sequence = SequenceUtil.normalize(sequenceBuilder.toString());//normalizing the assembled sequence to uppercase with whitespace removed.
+
+        if(sequence.isEmpty()){//checking the normalized sequence is empty or not.
+            throw new IllegalArgumentException("No sequence data found in FASTA file: " + fastaPath); // throws an error if the FASTA had no actual bases
+        }
+
+        return new FastaSequence(header,sequence);
 
     }
 

@@ -80,43 +80,32 @@ public class SequenceUtil { //utility class for DNA sequencing methods
             motifCount++; //increasing the motif count
             fromIndex = matchIndex + 1; //moves one character forward.
         }
-
         return motifCount; //returns the full motiff count.
-
     }
 
     public static String safeSubsequences(String sequence, int startInclusive, int endInclusive){ //extracting a subsqeuence from the given DNA document
-
         String normalized = normalize(sequence);// normalizing the sequence before slicing
-
         if(normalized.isEmpty()){ //checking if the sequence is empty.
             return ""; //returning blank if empty
         }
-
         int safeStart = Math.max(0, startInclusive); //clamping the start index so it cannot go bellow 0
         int safeEnd = Math.min(normalized.length(),endInclusive); //clamps the end so the loop  does not go beyond a certain length.
-
         if(safeStart >= safeEnd){
             return "";
         }
-
         return normalized.substring(safeStart,safeEnd);
-
     }
 
 
 
     public static String reverseComplement(String sequence) { // computes the reverse complement of a DNA sequence
-
         String normalized = normalize(sequence); // normalizes the input sequence before processing
         StringBuilder builder = new StringBuilder(); // creates a StringBuilder to build the reverse complement efficiently
         for (int i = normalized.length() - 1; i >= 0; i--) { // loops backward through the sequence so the output becomes reversed
             char base = normalized.charAt(i); // reads the current base from the original sequence
             builder.append(complement(base)); // appends the complement of that base into the output
         } // ends the reverse traversal loop
-
         return builder.toString(); // returns the completed reverse-complement sequence
-
     } // ends the reverseComplement method
 
     public static char complement(char base) { // returns the DNA complement for one base

@@ -1,7 +1,4 @@
 package com.demo.genome.model;
 
-public class AnalysisReport {
-
-
-
+public class TriageResult {
 }
